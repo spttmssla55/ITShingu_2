@@ -11,14 +11,14 @@ const Header = () => {
         
         <SearchInput type="text" placeholder="검색..." />
         
-        <LoginText>로그인</LoginText> {/* 로그인 텍스트 추가 */}
+        <LoginText><NavLink href="/login.js">로그인</NavLink></LoginText> {/* 로그인 텍스트 추가 */}
       </TopRow>
       <Nav>
         <NavList>
-          <NavItem><NavLink href="/">홈</NavLink></NavItem>
-          <NavItem><NavLink href="#">서비스</NavLink></NavItem>
-          <NavItem><NavLink href="/about">소개</NavLink></NavItem>
-          <NavItem><NavLink href="/contact">연락처</NavLink></NavItem>
+          <NavItem><NavLink href="/">도시들</NavLink></NavItem>
+          <NavItem><NavLink href="#">현지인</NavLink></NavItem>
+          <NavItem><NavLink href="/about">이벤트</NavLink></NavItem>
+          
         </NavList>
       </Nav>
     </HeaderContainer>
@@ -34,7 +34,6 @@ const HeaderContainer = styled.header`
   color: black;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 40px;
   max-width: 100%;
 
   @media (max-width: 1400px) { 
