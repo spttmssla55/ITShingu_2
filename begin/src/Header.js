@@ -6,12 +6,12 @@ const Header = () => {
     <HeaderContainer>
       <TopRow>
         <Logo>
-          <h1>여가</h1>
+          <NavLink href="/"><h1>여가</h1></NavLink>
         </Logo>
         
         <SearchInput type="text" placeholder="검색..." />
         
-        <LoginText><NavLink href="/login.js">로그인</NavLink></LoginText> {/* 로그인 텍스트 추가 */}
+        <LoginText><NavLink href="/login.js">로그인</NavLink></LoginText>
       </TopRow>
       <Nav>
         <NavList>
