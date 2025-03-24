@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "./Header"; 
-import Footer from "./Footer"; 
 
 export default function LoginForm() {
   const [id, setid] = useState("");
@@ -67,7 +65,6 @@ export default function LoginForm() {
 
   return (
     <div style={containerStyle}>
-      <Header />
       <div style={boxStyle}>
         <h2
           style={{
@@ -118,7 +115,6 @@ export default function LoginForm() {
           Kakao로 로그인
         </button>
       </div>
-      <Footer />
     </div>
   );
 }
