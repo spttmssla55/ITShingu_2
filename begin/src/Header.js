@@ -13,8 +13,8 @@ const Header = () => {
       <Nav>
         <NavList>
           <NavItem><NavLink href="/">홈</NavLink></NavItem>
-          <NavItem><NavLink href="#">서비스</NavLink></NavItem>
-          <NavItem><NavLink href="/about">소개</NavLink></NavItem>
+          <NavItem><NavLink href="/city">City</NavLink></NavItem>
+          <NavItem><NavLink href="/about">로그인</NavLink></NavItem>
           <NavItem><NavLink href="/contact">연락처</NavLink></NavItem>
         </NavList>
       </Nav>
