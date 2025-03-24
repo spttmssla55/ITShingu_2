@@ -12,7 +12,7 @@ export default function LoginForm() {
   const containerStyle = {
     minHeight: "100vh",
     display: "flex",
-    justifyContent: "center",
+    //justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#ffffff",
   };
@@ -55,7 +55,18 @@ export default function LoginForm() {
     fontSize: "1rem",
     cursor: "pointer",
     marginTop: "0.5rem",
-};
+  };
+const naverButtonStyle = {
+  width: "100%",
+  padding: "0.75rem",
+  backgroundColor: "#03c75a",
+  color: "#000000",
+  border: "none",
+  borderRadius: "0.5rem",
+  fontSize: "1rem",
+  cursor: "pointer",
+  marginTop: "0.5rem",
+  };
 
   const linkStyle = {
     color: "#0070b6",
@@ -113,6 +124,9 @@ export default function LoginForm() {
         </p>
         <button type="submit" style={kakaoButtonStyle}>
           Kakao로 로그인
+        </button>
+        <button type="submit" style={naverButtonStyle}>
+          NAVER로 로그인
         </button>
       </div>
     </div>
