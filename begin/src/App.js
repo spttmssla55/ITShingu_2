@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from "./RouteFor/routes";
 import Header from "./Header";
-import LoginForm from './login'; // 로그인 페이지 import
 
 const renderRoutes = (routes) => {
     return routes.map((route, index) => {
@@ -25,7 +24,6 @@ function App() {
             <Header />
             <Routes>
                 {renderRoutes(routes)}
-                <Route path="/login" element={<LoginForm />} /> {/* 로그인 경로 추가 */}
             </Routes>
         </Router>
     );

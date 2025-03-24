@@ -6,6 +6,8 @@ import City from "../Cities/City";
 // import Settings from './pages/Settings';
 // import Profile from './pages/Profile';
 import CityGestH from "../Cities/CityGestH";
+import Login from "../Loggin/Login";
+import Signup from "../Loggin/Signup";
 import Meddle from "../Meddle";
 
 const routes = [
@@ -23,6 +25,16 @@ const routes = [
         path: '/citygesth',
         component: CityGestH,
     },
+    {
+        path: '/login',
+        component: Login,
+    },
+    
+    {
+        path: '/signup',
+        component: Signup,
+    },
+
 
     // {
     //     path: '/dashboard',
