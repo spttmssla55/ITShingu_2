@@ -12,13 +12,9 @@ const Header = () => {
         
         <SearchInput type="text" placeholder="검색..." />
         
-<<<<<<< HEAD
-        <LoginText><NavLink href="/login.js">로그인</NavLink></LoginText>
-=======
         <LoginText>
           <Link to="/login">로그인</Link> {/* Link 컴포넌트를 사용하여 로그인 페이지로 이동 */}
         </LoginText>
->>>>>>> 2f144dc9a2209b1e682624c32eb31ed5cb749f96
       </TopRow>
       <Nav>
         <NavList>
