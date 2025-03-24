@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from "./RouteFor/routes";
 import Header from "./Header";
+import CSS from "./App.css";
 
 const renderRoutes = (routes) => {
     return routes.map((route, index) => {
@@ -22,9 +23,11 @@ function App() {
     return (
         <Router>
             <Header />
-            <Routes>
-                {renderRoutes(routes)}
-            </Routes>
+            <div className="main-content">
+                <Routes>
+                    {renderRoutes(routes)}
+                </Routes>
+            </div>
         </Router>
     );
 }

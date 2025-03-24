@@ -31,7 +31,7 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 40px;
+  padding: 10px 40px;
   background-color: #ffffff;
   color: black;
   width: 100%;
@@ -73,7 +73,7 @@ const SearchInput = styled.input`
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  width: 250px;
+  width: 400px;
   font-size: 1rem;
 
   &:focus {

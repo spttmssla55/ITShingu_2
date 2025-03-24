@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+.main-content {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 120px); /* 헤더와 푸터의 높이를 제외하고 화면 중앙에 위치 */
+  
+}
+
+.main-content .content {
+  
+  width: 100%;
+  max-width: 1200px; /* 최대 너비 설정, 필요에 따라 조정 */
+  text-align: center;
+}
