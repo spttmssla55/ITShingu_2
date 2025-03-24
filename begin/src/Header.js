@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'; // Link 컴포넌트 import
 
 const Header = () => {
   return (
@@ -11,7 +12,9 @@ const Header = () => {
         
         <SearchInput type="text" placeholder="검색..." />
         
-        <LoginText><NavLink href="/login.js">로그인</NavLink></LoginText> {/* 로그인 텍스트 추가 */}
+        <LoginText>
+          <Link to="/login">로그인</Link> {/* Link 컴포넌트를 사용하여 로그인 페이지로 이동 */}
+        </LoginText>
       </TopRow>
       <Nav>
         <NavList>
@@ -96,6 +99,11 @@ const LoginText = styled.span`
 
   @media (max-width: 768px) {
     font-size: 1rem; /* 작은 화면에서 폰트 크기 줄이기 */
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상 스타일을 상속 */
   }
 `;
 
