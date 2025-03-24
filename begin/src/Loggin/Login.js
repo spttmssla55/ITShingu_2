@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+//Login.js 대문자로 변경
 export default function LoginForm() {
   const [id, setid] = useState("");
   const [password, setPassword] = useState("");
