@@ -33,15 +33,14 @@ const Meddle = () => {
     <MeddleContainer>
       <ImageSlider />
 
-      <FanfareWrapper>
+      <ResponsiveContainer>
+        {/* 여가 최저가 보장 텍스트가 왼쪽에 배치 */}
         <FanfareContainer>
           <FanfareImage src={fanfare} alt="fanfare" />
           <FanfareText>여가 최저가 보장!</FanfareText>
           <FanfareImage src={fanfare} alt="fanfare" />
         </FanfareContainer>
-      </FanfareWrapper>
 
-      <ResponsiveContainer>
         <ArrowButton onClick={handlePrev}>&lt;</ArrowButton>
         <BoxWrapper>
           <BoxSlider style={{ transform: `translateX(-${startIndex * (100 / 3)}%)` }}>
@@ -55,27 +54,27 @@ const Meddle = () => {
 
       {/* ✅ 새로 추가된 컴포넌트 */}
       <ToggleRectangles />
-      <img src={spring} alt='spring' style={{ marginTop: "20px", height: "120px", width: "1200px" }} /> 
-      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "1200px" }}>평점순</span>
+      <img src={spring} alt='spring' style={{ marginTop: "20px", width: "100%", maxWidth: "1200px" }} /> 
+      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1200px" }}>평점순</span>
       {/* ✅ 둥근 사각형 리스트 */}
       <RoundedRectangleContainer>
         <RoundedRectangle>
-          <img src={fan2_1}/>
+          <img src={fan2_1} alt="fan2_1"/>
         </RoundedRectangle>
         <RoundedRectangle>
-          <img src={fan2_2}/>
+          <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
         <RoundedRectangle>
-          <img src={fan2_1}/>
+          <img src={fan2_1} alt="fan2_1"/>
         </RoundedRectangle>
         <RoundedRectangle>
-          <img src={fan2_2}/>
+          <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
         <RoundedRectangle>
-          <img src={fan2_1}/>
+          <img src={fan2_1} alt="fan2_1"/>
         </RoundedRectangle>
         <RoundedRectangle>
-          <img src={fan2_2}/>
+          <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
       </RoundedRectangleContainer>
     </MeddleContainer>
@@ -179,27 +178,31 @@ const ToggleRectangles = () => {
 
 // ✅ 스타일 코드
 const MeddleContainer = styled.div`
-  max-width: calc(100% - 1400px);
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 `;
 
-const FanfareWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 50px;
-`;
-
-const FanfareContainer = styled.div`
-  position: absolute;
-  top: 170px;
-  left: 40px;
+const ResponsiveContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 20px;
+  margin-left: 400px;
+  width: 100%;
+  justify-content: center;
+`;
+
+const FanfareContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;  /* 위치 고정 */
+  left: 250px;  /* 왼쪽에 고정 */
 `;
 
 const FanfareImage = styled.img`
@@ -213,11 +216,49 @@ const FanfareText = styled.span`
   color: #ff5722;
 `;
 
+const ArrowButton = styled.button`
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+`;
+
+const BoxWrapper = styled.div`
+  width: 80%;
+  max-width: 630px;
+  overflow: hidden;
+`;
+
+const BoxSlider = styled.div`
+  display: flex;
+  gap: 10px;
+  transition: transform 0.5s ease-in-out;
+`;
+
+const ResponsiveBox = styled.div`
+  width: 30%;
+  min-width: 200px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
 const SliderContainer = styled.div`
   position: relative;
-  width: 100%;
-  height: 300px;
+  width: 90%;
+  max-width: 1200px;
+  height: 500px;
   overflow: hidden;
+  margin: 0 auto;
 `;
 
 const SliderArrowLeft = styled.img`
@@ -253,49 +294,6 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const ResponsiveContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  margin-left: 400px;
-`;
-
-const BoxWrapper = styled.div`
-  width: 630px;
-  overflow: hidden;
-`;
-
-const BoxSlider = styled.div`
-  display: flex;
-  gap: 10px;
-  transition: transform 0.5s ease-in-out;
-`;
-
-const ResponsiveBox = styled.div`
-  width: 200px;
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid gray;
-  border-radius: 5px;
-  cursor: pointer;
-  flex-shrink: 0;
-`;
-
-const ArrowButton = styled.button`
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 5px;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   margin-top: 20px;
@@ -303,19 +301,17 @@ const ButtonContainer = styled.div`
 `;
 
 const ToggleButton = styled.button`
-  width: 600px;
+  flex-grow: 1;
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
-  border: 1px solid gray; /* 전체 테두리 유지 */
-  border-bottom: ${(props) => (props.isActive ? "1px solid transparent" : "1px solid black")}; /* 선택된 버튼의 아래 테두리를 투명하게 설정 */
-  background-color: white; /* 항상 흰색 배경 */
-  color: ${(props) => (props.isActive ? "black" : "gray")}; /* 선택된 버튼은 검정, 나머지는 회색 */
+  border: 1px solid gray;
+  border-bottom: ${(props) => (props.isActive ? "1px solid transparent" : "1px solid black")};
+  background-color: white;
+  color: ${(props) => (props.isActive ? "black" : "gray")};
   cursor: pointer;
   transition: all 0.3s ease;
 `;
-
-
 
 const RectangleContainer = styled.div`
   display: flex;
@@ -329,7 +325,6 @@ const Rectangle = styled.div`
   background-color: lightgray;
 `;
 
-// ✅ 둥근 사각형 스타일
 const RoundedRectangleContainer = styled.div`
   display: flex;
   gap: 20px;
@@ -341,7 +336,7 @@ const RoundedRectangle = styled.div`
   height: 150px;
   background-color: lightgray;
   border-radius: 20px;
-  overflow: hidden; /* 이미지가 넘치지 않도록 설정 */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -349,7 +344,7 @@ const RoundedRectangle = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
+    object-fit: cover;
   }
 `;
 
