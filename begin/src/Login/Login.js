@@ -11,8 +11,8 @@ export default function LoginForm() {
   const containerStyle = {
     minHeight: "100vh",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center", 
+    //justifyContent: "center",
+    //alignItems: "center", 
     backgroundColor: "#ffffff",
   };
 
