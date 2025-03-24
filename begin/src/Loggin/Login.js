@@ -12,8 +12,8 @@ export default function LoginForm() {
   const containerStyle = {
     minHeight: "100vh",
     display: "flex",
-    //justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "center", // 가로 중앙 정렬
+    alignItems: "center", // 세로 중앙 정렬
     backgroundColor: "#ffffff",
   };
 
@@ -22,7 +22,7 @@ export default function LoginForm() {
     padding: "2rem",
     borderRadius: "1rem",
     width: "100%",
-    maxWidth: "400px",
+    maxWidth: "400px", // 로그인 박스 최대 너비 설정
   };
 
   const inputStyle = {
@@ -56,16 +56,17 @@ export default function LoginForm() {
     cursor: "pointer",
     marginTop: "0.5rem",
   };
-const naverButtonStyle = {
-  width: "100%",
-  padding: "0.75rem",
-  backgroundColor: "#03c75a",
-  color: "#000000",
-  border: "none",
-  borderRadius: "0.5rem",
-  fontSize: "1rem",
-  cursor: "pointer",
-  marginTop: "0.5rem",
+
+  const naverButtonStyle = {
+    width: "100%",
+    padding: "0.75rem",
+    backgroundColor: "#03c75a",
+    color: "#000000",
+    border: "none",
+    borderRadius: "0.5rem",
+    fontSize: "1rem",
+    cursor: "pointer",
+    marginTop: "0.5rem",
   };
 
   const linkStyle = {

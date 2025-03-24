@@ -256,7 +256,7 @@ const SliderContainer = styled.div`
   position: relative;
   width: 90%;
   max-width: 1200px;
-  height: 500px;
+  height: 300px;
   overflow: hidden;
   margin: 0 auto;
 `;

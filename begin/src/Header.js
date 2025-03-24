@@ -1,24 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'; // Link 컴포넌트 import
 
 const Header = () => {
   return (
     <HeaderContainer>
       <TopRow>
         <Logo>
-          <h1>여가</h1>
+          <NavLink href="/"><h1>여가</h1></NavLink>
         </Logo>
         
         <SearchInput type="text" placeholder="검색..." />
         
-        <LoginText>로그인</LoginText> {/* 로그인 텍스트 추가 */}
+        <LoginText>
+          <Link to="/login">로그인</Link> {/* Link 컴포넌트를 사용하여 로그인 페이지로 이동 */}
+        </LoginText>
       </TopRow>
       <Nav>
         <NavList>
-          <NavItem><NavLink href="/">홈</NavLink></NavItem>
-          <NavItem><NavLink href="#">서비스</NavLink></NavItem>
-          <NavItem><NavLink href="/about">소개</NavLink></NavItem>
-          <NavItem><NavLink href="/contact">연락처</NavLink></NavItem>
+          <NavItem><NavLink href="/city">도시들</NavLink></NavItem>
+          <NavItem><NavLink href="#">현지인</NavLink></NavItem>
+          <NavItem><NavLink href="/about">이벤트</NavLink></NavItem>
         </NavList>
       </Nav>
     </HeaderContainer>
@@ -34,7 +36,6 @@ const HeaderContainer = styled.header`
   color: black;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 40px;
   max-width: 100%;
 
   @media (max-width: 1400px) { 
@@ -98,6 +99,11 @@ const LoginText = styled.span`
 
   @media (max-width: 768px) {
     font-size: 1rem; /* 작은 화면에서 폰트 크기 줄이기 */
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit; /* 링크의 기본 색상 스타일을 상속 */
   }
 `;
 
