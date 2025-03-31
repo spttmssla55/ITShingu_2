@@ -7,9 +7,10 @@ import City from "../Cities/City";
 // import Profile from './pages/Profile';
 import CityGestH from "../Cities/CityGestH";
 import Locals from "../Locals/Locals";
-import Login from "../Loggin/Login";
-import Signup from "../Loggin/Signup";
+import Login from "../Login/Login";
+import Signup from "../Login/Signup";
 import Meddle from "../Meddle";
+import ID_pw_find from "../Login/ID_pw_find";
 
 const routes = [
     {
@@ -39,6 +40,10 @@ const routes = [
     {
         path: '/locals',
         component: Locals,
+    },
+    {
+        path: '/ID_pw_find',
+        component: ID_pw_find,
     },
 
     // {
