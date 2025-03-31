@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 export default function LoginForm() {
   const [id, setid] = useState("");
   const [password, setPassword] = useState("");
@@ -8,14 +9,21 @@ export default function LoginForm() {
     console.log("로그인 시도:", { id, password });
   };
 
+  const handleFindClick = () => {
+    window.open("/popup/find", "FindPopup", "width=400,height=600,left=200,top=100");
+
+  };
+
   const containerStyle = {
     minHeight: "100vh",
     display: "flex",
     //justifyContent: "center",
-    //alignItems: "center", 
+    alignItems: "flex-start",
     backgroundColor: "#ffffff",
+    paddingTop: "4rem",
   };
-
+  
+  
   const boxStyle = {
     backgroundColor: "#a0d468",
     padding: "2rem",
@@ -23,6 +31,7 @@ export default function LoginForm() {
     width: "100%",
     maxWidth: "400px",
   };
+  
 
   const inputStyle = {
     width: "100%",
@@ -77,13 +86,7 @@ export default function LoginForm() {
   return (
     <div style={containerStyle}>
       <div style={boxStyle}>
-        <h2
-          style={{
-            textAlign: "center",
-            marginBottom: "1.5rem",
-            fontSize: "1.5rem",
-          }}
-        >
+        <h2 style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "1.5rem" }}>
           로그인
         </h2>
         <form onSubmit={handleSubmit}>
@@ -113,21 +116,22 @@ export default function LoginForm() {
             로그인
           </button>
         </form>
-        <p
-          style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.9rem" }}
-        >
+
+        <p style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.9rem" }}>
           계정이 없으신가요?
-          <a href="/signup" style={linkStyle}>
-            {" "}
-            회원가입
-          </a>
+          <a href="/signup" style={linkStyle}> 회원가입 </a>
         </p>
-        <button type="submit" style={kakaoButtonStyle}>
-          Kakao로 로그인
-        </button>
-        <button type="submit" style={naverButtonStyle}>
-          Naver로 로그인
-        </button>
+
+        <p style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.9rem" }}>
+          아이디, 비밀번호를 잊으셨나요?
+          <br />
+          <span onClick={handleFindClick} style={{ ...linkStyle, cursor: "pointer" }}>
+            아이디/비밀번호 찾기
+          </span>
+        </p>
+
+        <button type="submit" style={kakaoButtonStyle}>Kakao로 로그인</button>
+        <button type="submit" style={naverButtonStyle}>Naver로 로그인</button>
       </div>
     </div>
   );
