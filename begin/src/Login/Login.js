@@ -17,10 +17,13 @@ export default function LoginForm() {
   const containerStyle = {
     minHeight: "100vh",
     display: "flex",
-    alignItems: "center",
+    //justifyContent: "center",
+    alignItems: "flex-start",
     backgroundColor: "#ffffff",
+    paddingTop: "4rem",
   };
-
+  
+  
   const boxStyle = {
     backgroundColor: "#a0d468",
     padding: "2rem",
@@ -28,6 +31,7 @@ export default function LoginForm() {
     width: "100%",
     maxWidth: "400px",
   };
+  
 
   const inputStyle = {
     width: "100%",
