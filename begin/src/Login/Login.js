@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function LoginForm() {
   const [id, setid] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("로그인 시도:", { id, password });
+  };
+
+  const handleFindClick = () => {
+    navigate("/ID_pw_find");
   };
 
   const containerStyle = {
@@ -113,6 +120,7 @@ export default function LoginForm() {
             로그인
           </button>
         </form>
+
         <p
           style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.9rem" }}
         >
@@ -122,6 +130,20 @@ export default function LoginForm() {
             회원가입
           </a>
         </p>
+
+        <p
+          style={{ textAlign: "center", marginTop: "1rem", fontSize: "0.9rem" }}
+        >
+          아이디,비밀번호를 잊으셨나요?
+          <span
+            onClick={handleFindClick}
+            style={{ ...linkStyle, cursor: "pointer" }}
+          >
+            {" "}
+            아이디/비밀번호 찾기
+          </span>
+        </p>
+
         <button type="submit" style={kakaoButtonStyle}>
           Kakao로 로그인
         </button>
