@@ -27,8 +27,9 @@ const Meddle = () => {
     if (startIndex - 3 >= 0) {
       setStartIndex(startIndex - 3);
     }
+    
   };
-
+    
   return (
     <MeddleContainer>
       <ImageSlider />
@@ -41,6 +42,7 @@ const Meddle = () => {
           <FanfareImage src={fanfare} alt="fanfare" />
         </FanfareContainer>
 
+        <ResponsiveContainer_1>
         <ArrowButton onClick={handlePrev}>&lt;</ArrowButton>
         <BoxWrapper>
           <BoxSlider style={{ transform: `translateX(-${startIndex * (100 / 3)}%)` }}>
@@ -50,12 +52,13 @@ const Meddle = () => {
           </BoxSlider>
         </BoxWrapper>
         <ArrowButton onClick={handleNext}>&gt;</ArrowButton>
+        </ResponsiveContainer_1>
       </ResponsiveContainer>
 
       {/* ✅ 새로 추가된 컴포넌트 */}
       <ToggleRectangles />
-      <img src={spring} alt='spring' style={{ marginTop: "20px", width: "100%", maxWidth: "1200px" }} /> 
-      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1200px" }}>평점순</span>
+      <img src={spring} alt='spring' style={{ marginTop: "20px", width: "100%", maxWidth: "1180px" }} /> 
+      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px" }}>평점순</span>
       {/* ✅ 둥근 사각형 리스트 */}
       <RoundedRectangleContainer>
         <RoundedRectangle>
@@ -77,6 +80,8 @@ const Meddle = () => {
           <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
       </RoundedRectangleContainer>
+      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름</span>
+      
     </MeddleContainer>
   );
 };
@@ -183,26 +188,28 @@ const MeddleContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding-bottom: 20px;
   box-sizing: border-box;
 `;
 
 const ResponsiveContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 100px;
   margin-top: 20px;
-  margin-left: 400px;
+  margin-left: 100px;
   width: 100%;
   justify-content: center;
 `;
-
+const ResponsiveContainer_1 = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
 const FanfareContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  position: absolute;  /* 위치 고정 */
-  left: 250px;  /* 왼쪽에 고정 */
 `;
 
 const FanfareImage = styled.img`
@@ -211,9 +218,9 @@ const FanfareImage = styled.img`
 `;
 
 const FanfareText = styled.span`
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
-  color: #ff5722;
+  color:rgb(0, 0, 0);
 `;
 
 const ArrowButton = styled.button`
@@ -256,9 +263,10 @@ const SliderContainer = styled.div`
   position: relative;
   width: 90%;
   max-width: 1200px;
-  height: 300px;
+  height: 350px;
   overflow: hidden;
   margin: 0 auto;
+  top: 0; /* 추가 */
 `;
 
 const SliderArrowLeft = styled.img`
@@ -302,7 +310,7 @@ const ButtonContainer = styled.div`
 
 const ToggleButton = styled.button`
   flex-grow: 1;
-  padding: 15px;
+  padding: 15px 190px;
   font-size: 18px;
   font-weight: bold;
   border: 1px solid gray;
@@ -348,4 +356,46 @@ const RoundedRectangle = styled.div`
   }
 `;
 
+const NewSliderContainer = styled.div`
+  width: 800px; // 8개의 아이템이 모두 보이도록 컨테이너 너비 설정 (200px * 4)
+  overflow: hidden;
+  margin-top: 20px;
+  position: relative;
+`;
+
+const NewItemsContainer = styled.div`
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+`;
+
+const NewItem = styled.div`
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background-color: lightblue;
+  margin-right: 10px;
+`;
+
+const NewArrowButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+
+  &.new-prev {
+    left: 10px;
+  }
+
+  &.new-next {
+    right: 10px;
+  }
+`;
 export default Meddle;

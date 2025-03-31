@@ -6,6 +6,7 @@ import City from "../Cities/City";
 // import Settings from './pages/Settings';
 // import Profile from './pages/Profile';
 import CityGestH from "../Cities/CityGestH";
+import Locals from "../Locals/Locals";
 import Login from "../Loggin/Login";
 import Signup from "../Loggin/Signup";
 import Meddle from "../Meddle";
@@ -35,6 +36,10 @@ const routes = [
         component: Signup,
     },
 
+    {
+        path: '/locals',
+        component: Locals,
+    },
 
     // {
     //     path: '/dashboard',
