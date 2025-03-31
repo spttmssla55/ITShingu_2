@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function FindAccountForm() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [tab, setTab] = useState("id");
-  const navigate = useNavigate();
 
   const handleFindId = () => {
     setMessage(`이메일(${email})로 등록된 아이디는 exampleUser입니다.`);
@@ -16,21 +14,17 @@ export default function FindAccountForm() {
     setMessage(`아이디(${username})로 등록된 이메일로 임시 비밀번호를 전송했습니다.`);
   };
 
-  const handleBackToLogin = () => {
-    navigate("/login");
-  };
-
   const styles = {
     container: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       minHeight: "100vh",
-      backgroundColor: "#f4f4f4",
+      backgroundColor: "#ffffff",
       padding: "16px",
     },
     card: {
-      background: "white",
+      background: "#ffffff",
       padding: "24px",
       borderRadius: "12px",
       width: "100%",
@@ -87,7 +81,7 @@ export default function FindAccountForm() {
     backButton: {
       marginTop: "20px",
       padding: "10px",
-      background: "#6c757d",
+      background: "#8db5b3",
       color: "white",
       border: "none",
       borderRadius: "6px",
@@ -139,9 +133,6 @@ export default function FindAccountForm() {
           </div>
         )}
         {message && <p style={styles.message}>{message}</p>}
-        <button style={styles.backButton} onClick={handleBackToLogin}>
-          로그인으로 돌아가기
-        </button>
       </div>
     </div>
   );
