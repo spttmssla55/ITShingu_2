@@ -1,91 +1,122 @@
 import React, { useState } from "react";
 import "./Locals.css";
-import LocalsImage from '../image/Locals.jpg';  // 경로 수정
-import { FaSearch } from 'react-icons/fa';  // react-icons에서 돋보기 아이콘 import
+import LocalsImage from '../image/Locals.jpg';
+import { FaSearch, FaUserCircle } from 'react-icons/fa';
 
 // 호텔 이미지들 import
 import Hotel1Image from '../image/Hotel1.jpg';
 import Hotel2Image from '../image/Hotel2.jpg';
 import Hotel3Image from '../image/Hotel3.jpg';
+import Hotel4Image from '../image/Hotel4.jpg';
+import Hotel5Image from '../image/Hotel5.jpg';
+
+const contents = {
+  header: {
+    title: "작은 도시, 거대한 감동",
+    subtitle: "여기와 함께, 외국 있는 여행의 진짜를 찾아 떠나요.",
+  },
+  hotels: [
+    { image: Hotel1Image, name: "Hotel Artemide", location: "Rome, Italy", recommendedBy: "Sofia" },
+    { image: Hotel2Image, name: "Hotel Diana Roof Garden", location: "Rome, Italy", recommendedBy: "Matteo" },
+    { image: Hotel3Image, name: "Starhotels Metropole", location: "Rome, Italy", recommendedBy: "Sofia" },
+  ],
+  moreHotels: [
+    { image: Hotel4Image, name: "Rome Marriott Grand Hotel Flora", location: "Rome, Italy", recommendedBy: "Liam" },
+    { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
+    { image: Hotel2Image, name: "Hotel Tokyo", location: "Tokyo, Japan", recommendedBy: "James" },
+    { image: Hotel3Image, name: "Hotel Rome", location: "Rome, Italy", recommendedBy: "Sophia" },
+    { image: Hotel4Image, name: "Hotel Paris", location: "Paris, France", recommendedBy: "Liam" },
+    { image: Hotel1Image, name: "Hotel Berlin", location: "Berlin, Germany", recommendedBy: "Olivia" },
+  ],
+  recommenders: [
+    { name: "Sofia", image: "https://via.placeholder.com/30" },
+    { name: "Matteo", image: "https://via.placeholder.com/30" },
+    { name: "Liam", image: "https://via.placeholder.com/30" },
+    { name: "Emma", image: "https://via.placeholder.com/30" },
+    { name: "James", image: "https://via.placeholder.com/30" },
+    { name: "Sophia", image: "https://via.placeholder.com/30" },
+    { name: "Olivia", image: "https://via.placeholder.com/30" },
+    { name: "Mia", image: "https://via.placeholder.com/30" },
+    { name: "John", image: "https://via.placeholder.com/30" },
+    { name: "George", image: "https://via.placeholder.com/30" },
+  ]
+};
 
 const Locals = () => {
-  const [searchQuery, setSearchQuery] = useState("");  // 상태 추가: 검색어
+  const [searchQuery, setSearchQuery] = useState("");
+  const [hotels, setHotels] = useState(contents.hotels);
+  const [showMore, setShowMore] = useState(true);
+  const [showRecommenders, setShowRecommenders] = useState(false);
 
-  const handleSearch = () => {
-    // 검색어 처리 로직을 여기서 추가 (예: 콘솔에 검색어 출력)
-    console.log("검색어:", searchQuery);
-    // 추후 실제 데이터와 연결하여 검색 기능을 구현할 수 있습니다.
+  const handleSearch = () => console.log("검색어:", searchQuery);
+  const handleViewMore = () => {
+    const newHotels = [...hotels, ...contents.moreHotels];
+    setHotels(newHotels);
+    if (newHotels.length >= 12) setShowMore(false); // 더 보기 버튼 숨기기
+  };
+
+  const toggleRecommenders = () => {
+    setShowRecommenders(prevState => !prevState);
   };
 
   return (
     <div className="locals-container">
-      {/* 상단 이미지 */}
       <header className="locals-header">
         <img src={LocalsImage} alt="Small City" className="header-image" />
         <div className="header-text">
-          <h1>작은 도시, 거대한 감동</h1>
-          <p>여기와 함께, 외국 있는 여행의 진짜를 찾아 떠나요.</p>
+          <h1>{contents.header.title}</h1>
+          <p>{contents.header.subtitle}</p>
           <div className="search-container">
-            <input 
-              type="text" 
-              placeholder="여행 키워드 검색" 
+            <input
+              type="text"
+              placeholder="여행 키워드 검색"
               className="search-input"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}  // 입력값을 상태에 반영
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button className="search-btn" onClick={handleSearch}>
-              <FaSearch /> {/* 돋보기 아이콘 추가 */}
+              <FaSearch />
             </button>
           </div>
         </div>
       </header>
 
-      {/* 추천 장소 */}
       <section className="recommendations">
-        <h2>현재인과 함께하는 소도시 여행 속 추천 장소</h2>
-        <div className="recommendation-list">
-          <div className="recommendation-card">
-            <img
-              src={Hotel1Image}  // 호텔1 이미지 경로 적용
-              alt="Hotel Artemide"
-              className="card-image"
-            />
-            <div className="card-info">
-              <h3>Hotel Artemide</h3>
-              <p>Via Nazionale, 22, 00184 Roma RM, Italy</p>
-              <span>추천인: Sofia</span>
-            </div>
-          </div>
+        <div className="recommendations-header">
+          <h2>현재인과 함께하는 소도시 여행 속 추천 장소</h2>
+          <button className="show-recommenders-btn" onClick={toggleRecommenders}>
+            {showRecommenders ? "추천인 목록 숨기기" : "추천인 목록 보기"}
+          </button>
 
-          <div className="recommendation-card">
-            <img
-              src={Hotel2Image}  // 호텔2 이미지 경로 적용
-              alt="Hotel Ritz Paris"
-              className="card-image"
-            />
-            <div className="card-info">
-              <h3>Hotel Ritz Paris</h3>
-              <p>15 Place Vendôme, 75001 Paris, France</p>
-              <span>추천인: Matteo</span>
-            </div>
-          </div>
-
-          <div className="recommendation-card">
-            <img
-              src={Hotel3Image}  // 호텔3 이미지 경로 적용
-              alt="The Plaza Hotel"
-              className="card-image"
-            />
-            <div className="card-info">
-              <h3>The Plaza Hotel</h3>
-              <p>Fifth Avenue at Central Park South, New York, NY 10019, USA</p>
-              <span>추천인: Sofia</span>
-            </div>
-          </div>
+          {showRecommenders && (
+            <ul className="recommender-list">
+              {contents.recommenders.map((recommender, index) => (
+                <li key={index} className="recommender-item">
+                  <img src={recommender.image} alt={recommender.name} className="recommender-image" />
+                  <span>{recommender.name}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <button className="view-more-btn">더 보기</button>
-      </section>
 
+        <div className="recommendation-list">
+          {hotels.map((hotel, index) => (
+            <div className="recommendation-card" key={index}>
+              <div className="card-image-container">
+                <img src={hotel.image} alt={hotel.name} className="card-image" />
+                <FaUserCircle className="user-icon" />
+              </div>
+              <div className="card-info">
+                <h3>{hotel.name}</h3>
+                <p>{hotel.location}</p>
+                <span>추천인: {hotel.recommendedBy}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {showMore && <button className="view-more-btn" onClick={handleViewMore}>더 보기</button>}
+      </section>
     </div>
   );
 };
