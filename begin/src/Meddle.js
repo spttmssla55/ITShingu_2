@@ -11,11 +11,25 @@ import arrowRight from './image/arrow-right.png';
 import spring from './image/spring.png';
 import fan2_1 from './image/2-1.jpg';
 import fan2_2 from './image/2-2.jpg';
+import arrowCity from './image/arrow-city.png';
+
 
 const Meddle = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [activeButton, setActiveButton] = useState("left");
-  const boxes = Array(9).fill("혜택 보기");
+  const boxes = Array(9).fill("사진");
+  // 예시 데이터 (DB에서 받아올 예정)
+  const [cities, setCities] = useState([
+    { id: 1, name: "서울", imageUrl: fan2_1 },
+    { id: 2, name: "부산", imageUrl: fan2_2 },
+    { id: 3, name: "대구", imageUrl: fan2_1 },
+    { id: 4, name: "인천", imageUrl: fan2_2 },
+  ]);
+  
+
+  const handleClickcity = (cityName) => {
+    alert(`You clicked on ${cityName}`);
+  };
 
   const handleNext = () => {
     if (startIndex + 3 < boxes.length) {
@@ -27,7 +41,6 @@ const Meddle = () => {
     if (startIndex - 3 >= 0) {
       setStartIndex(startIndex - 3);
     }
-    
   };
     
   return (
@@ -80,8 +93,26 @@ const Meddle = () => {
           <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
       </RoundedRectangleContainer>
-      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름</span>
-      
+      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름1</span>
+      <ContainerCity>
+      {cities.map((city) => (
+        <SquareStyleCity key={city.id} onClick={() => handleClickcity(city.name)}>
+          <CityImage src={city.imageUrl} alt={city.name} />
+          <CityName>{city.name}</CityName>
+        </SquareStyleCity>
+      ))}
+      <ArrowImage src={arrowCity} alt="arrowCity" />
+    </ContainerCity>
+    <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px"  }}>도시이름2</span>
+      <NewContainerCity>
+        {cities.map((city) => (
+          <NewSquareStyleCity key={city.id} onClick={() => handleClickcity(city.name)}>
+            <NewCityImage src={city.imageUrl} alt={city.name} />
+            <NewCityName>{city.name}</NewCityName>
+          </NewSquareStyleCity>
+        ))}
+        <NewArrowImage src={arrowCity} alt="arrowCity" />
+      </NewContainerCity>
     </MeddleContainer>
   );
 };
@@ -180,7 +211,20 @@ const ToggleRectangles = () => {
     </>
   );
 };
+const NewCitiesSlider = () => {
+  const [cities, setCities] = useState([
+    { id: 1, name: "서울", imageUrl: fan2_1 },
+    { id: 2, name: "부산", imageUrl: fan2_2 },
+    { id: 3, name: "대구", imageUrl: fan2_1 },
+    { id: 4, name: "인천", imageUrl: fan2_2 },
+  ]);
 
+  const handleClickcity = (cityName) => {
+    alert(`You clicked on ${cityName}`);
+  };
+
+  
+};
 // ✅ 스타일 코드
 const MeddleContainer = styled.div`
   width: 100%;
@@ -356,46 +400,119 @@ const RoundedRectangle = styled.div`
   }
 `;
 
-const NewSliderContainer = styled.div`
-  width: 800px; // 8개의 아이템이 모두 보이도록 컨테이너 너비 설정 (200px * 4)
-  overflow: hidden;
-  margin-top: 20px;
-  position: relative;
-`;
-
-const NewItemsContainer = styled.div`
+const ContainerCity = styled.div`
   display: flex;
-  transition: transform 0.3s ease-in-out;
+  justify-content: space-evenly;  /* 자식 요소들 사이의 간격을 고르게 배분 */
+  gap: 20px;  /* 요소 간의 간격 */
+  flex-wrap: nowrap;  /* 자식 요소들이 줄 바꿈을 하지 않게 설정 */
+  padding: 20px;
+  overflow-x: auto;  /* 컨테이너가 화면에 맞지 않으면 가로 스크롤 생성 */
+ 
 `;
 
-const NewItem = styled.div`
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  background-color: lightblue;
-  margin-right: 10px;
+// 자식 요소: 각 사각형 스타일
+const SquareStyleCity = styled.div`
+  height: 280px;
+  width: 280px;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;  /* 마우스를 대면 클릭 가능하도록 설정 */
+  transition: transform 0.3s ease-in-out;  /* 마우스 오버 시 애니메이션 효과 추가 */
+
+  /* 화면 크기 768px 이하일 때 크기 조정 */
+  @media (max-width: 768px) {
+    height: 200px;
+    width: 200px;
+  }
+
+  /* 화면 크기 480px 이하일 때 크기 조정 */
+  @media (max-width: 480px) {
+    height: 150px;
+    width: 150px;
+  }
+
+  /* hover 시 변환 효과 추가 */
+  &:hover {
+    transform: scale(1.05);  /* 마우스를 대면 크기 확장 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);  /* 테두리 아래에 그림자 추가 */
+  }
+`;
+const CityImage = styled.img`
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
 `;
 
-const NewArrowButton = styled.button`
+// CityName 스타일링
+const CityName = styled.div`
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+// 화살표 이미지 스타일링
+const ArrowImage = styled.img`
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 20px;
-  cursor: pointer;
+  width: 50px;  
+  height: 50px;
+  margin-left: 1180px;
+  margin-top: 110px;
+`;
 
-  &.new-prev {
-    left: 10px;
+const NewContainerCity = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  flex-wrap: nowrap;
+  padding: 20px;
+  overflow-x: auto;
+`;
+
+const NewSquareStyleCity = styled.div`
+  height: 280px;
+  width: 280px;
+  background-color: white;  /* 배경색을 다르게 설정 */
+  border: 1px solid darkblue;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    height: 200px;
+    width: 200px;
   }
 
-  &.new-next {
-    right: 10px;
+  @media (max-width: 480px) {
+    height: 150px;
+    width: 150px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
 `;
+
+const NewCityImage = styled.img`
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+`;
+
+const NewCityName = styled.div`
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: darkblue;  /* 글자 색상 다르게 설정 */
+`;
+
+const NewArrowImage = styled.img`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin-left: 1180px;
+  margin-top: 110px;
+`;
+
+
 export default Meddle;
