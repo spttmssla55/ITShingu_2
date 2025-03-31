@@ -81,46 +81,8 @@ const Meddle = () => {
         </RoundedRectangle>
       </RoundedRectangleContainer>
       <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름</span>
-      <MeddleContainer>
-        <NewSlider items={['새로운 아이템 1', '새로운 아이템 2', '새로운 아이템 3','새로운 아이템 4','새로운 아이템 5','새로운 아이템 6','새로운 아이템 7','새로운 아이템 8']} />
-      </MeddleContainer>
+      
     </MeddleContainer>
-  );
-};
-
-const NewSlider = ({ items }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 4;
-
-  const handleNewPrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - itemsPerPage, 0));
-  };
-
-  const handleNewNext = () => {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + itemsPerPage, items.length - itemsPerPage)
-    );
-  };
-
-  return (
-    <NewSliderContainer>
-      <NewItemsContainer
-        style={{
-          transform: `translateX(-${(currentIndex / itemsPerPage) * 50}%)`, // 4개씩 슬라이드
-          width: `${items.length * 200}px`, // 전체 아이템 너비 (아이템 너비 * 개수)
-        }}
-      >
-        {items.map((item, index) => (
-          <NewItem key={index}>{item}</NewItem>
-        ))}
-      </NewItemsContainer>
-      <NewArrowButton className="new-prev" onClick={handleNewPrev}>
-        &lt;
-      </NewArrowButton>
-      <NewArrowButton className="new-next" onClick={handleNewNext}>
-        &gt;
-      </NewArrowButton>
-    </NewSliderContainer>
   );
 };
 
