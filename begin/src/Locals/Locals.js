@@ -86,24 +86,6 @@ const Locals = () => {
         <button className="view-more-btn">더 보기</button>
       </section>
 
-      <footer className="footer">
-        <div className="footer-info">
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">FAQs</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Submit Listing</a></li>
-            <li><a href="#">Support</a></li>
-          </ul>
-        </div>
-        <div className="footer-contact">
-          <p>주소: 13174, 성남시 중원구 광명로 377 신구대학교</p>
-          <p>전화: 031-740-1114</p>
-        </div>
-      </footer>
     </div>
   );
 };
