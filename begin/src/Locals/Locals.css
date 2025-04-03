@@ -196,15 +196,17 @@
 
 /* 추천인 목록 (초기 숨김) */
 .recommender-list {
-    position: absolute;
-    top: 100%;
+    position: absolute;  /* 고정 위치 X (전체 화면 차지 방지) */
+    top: 40px;  /* 버튼 아래에 위치 */
     left: 0;
     background: white;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    width: 200px;
-    z-index: 100;
+    width: 200px;  /* 적절한 크기 지정 (너비 100% 방지) */
+    max-height: 300px;  /* 너무 커지지 않도록 제한 */
+    overflow-y: auto;  /* 스크롤 허용 */
+    z-index: 100;  /* 다른 UI 요소 위에 오도록 설정 */
     display: none;
 }
 
@@ -218,6 +220,11 @@
     align-items: center;
     padding: 8px;
     border-bottom: 1px solid #eee;
+    background-color: white;
+}
+
+.recommender-item:last-child {
+    border-bottom: none;
 }
 
 .recommender-image {
@@ -226,8 +233,6 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-
-
 
   
   .recommendation-list {

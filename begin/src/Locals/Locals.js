@@ -9,6 +9,8 @@ import Hotel2Image from "../image/Hotel2.jpg";
 import Hotel3Image from "../image/Hotel3.jpg";
 import Hotel4Image from "../image/Hotel4.jpg";
 import Hotel5Image from "../image/Hotel5.jpg";
+import Hotel6Image from "../image/Hotel6.jpg";
+import Hotel7Image from "../image/Hotel7.jpg";
 
 const contents = {
   header: {
@@ -23,8 +25,10 @@ const contents = {
   moreHotels: [
     { image: Hotel4Image, name: "Rome Marriott Grand Hotel Flora", location: "Rome, Italy", recommendedBy: "Liam" },
     { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
-    { image: Hotel2Image, name: "Hotel Tokyo", location: "Tokyo, Japan", recommendedBy: "James" },
+    { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant by 'UNA cucina'", location: "Rome, Italy", recommendedBy: "James" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Liam" },
   ],
+ 
   recommenders: [
     { name: "Sofia", image: "https://via.placeholder.com/30" },
     { name: "Matteo", image: "https://via.placeholder.com/30" },
@@ -75,9 +79,9 @@ const Locals = () => {
         </div>
       </header>
 
-      <section className="recommendations">
+      <section className="recommendatio ns">
         <div className="recommendations-header">
-          <h2>현재인과 함께하는 소도시 여행 속 추천 장소</h2>
+          <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
 
           {/* 추천인 목록 보기 버튼 */}
           <div className="recommender-container">
