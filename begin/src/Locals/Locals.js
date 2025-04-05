@@ -21,14 +21,11 @@ const contents = {
     { image: Hotel1Image, name: "Hotel Artemide", location: "Rome, Italy", recommendedBy: "Sofia" },
     { image: Hotel2Image, name: "Hotel Diana Roof Garden", location: "Rome, Italy", recommendedBy: "Matteo" },
     { image: Hotel3Image, name: "Starhotels Metropole", location: "Rome, Italy", recommendedBy: "Sofia" },
-  ],
-  moreHotels: [
     { image: Hotel4Image, name: "Rome Marriott Grand Hotel Flora", location: "Rome, Italy", recommendedBy: "Liam" },
     { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
     { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant by 'UNA cucina'", location: "Rome, Italy", recommendedBy: "James" },
     { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Liam" },
   ],
- 
   recommenders: [
     { name: "Sofia", image: "https://via.placeholder.com/30" },
     { name: "Matteo", image: "https://via.placeholder.com/30" },
@@ -42,15 +39,20 @@ const contents = {
 
 const Locals = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [hotels, setHotels] = useState(contents.hotels);
+  const [hotels, setHotels] = useState(contents.hotels.slice(0, 4)); // 처음에는 4개의 호텔만 보임
   const [showMore, setShowMore] = useState(true);
   const [showRecommenders, setShowRecommenders] = useState(false);
 
   const handleSearch = () => console.log("검색어:", searchQuery);
+
   const handleViewMore = () => {
-    const newHotels = [...hotels, ...contents.moreHotels];
+    const nextHotels = contents.hotels.slice(hotels.length, hotels.length + 4); // 현재 리스트에 4개씩 추가
+    const newHotels = [...hotels, ...nextHotels];
     setHotels(newHotels);
-    if (newHotels.length >= 12) setShowMore(false);
+    
+    if (newHotels.length >= 16) {
+      setShowMore(false); // 최대 16개까지만 보이도록 설정
+    }
   };
 
   const toggleRecommenders = () => {
@@ -79,7 +81,7 @@ const Locals = () => {
         </div>
       </header>
 
-      <section className="recommendatio ns">
+      <section className="recommendations">
         <div className="recommendations-header">
           <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
 
@@ -106,6 +108,7 @@ const Locals = () => {
             <div className="recommendation-card" key={index}>
               <div className="card-image-container">
                 <img src={hotel.image} alt={hotel.name} className="card-image" />
+                {/* 아이콘을 상단 우측에 배치 */}
                 <FaUserCircle className="user-icon" />
               </div>
               <div className="card-info">
