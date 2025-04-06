@@ -11,8 +11,6 @@ import arrowRight from './image/arrow-right.png';
 import spring from './image/spring.png';
 import fan2_1 from './image/2-1.jpg';
 import fan2_2 from './image/2-2.jpg';
-import arrowCity from './image/arrow-city.png';
-
 
 const Meddle = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -93,7 +91,7 @@ const Meddle = () => {
           <img src={fan2_2} alt="fan2_2"/>
         </RoundedRectangle>
       </RoundedRectangleContainer>
-      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름1</span>
+      <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름</span>
       <ContainerCity>
       {cities.map((city) => (
         <SquareStyleCity key={city.id} onClick={() => handleClickcity(city.name)}>
@@ -101,7 +99,6 @@ const Meddle = () => {
           <CityName>{city.name}</CityName>
         </SquareStyleCity>
       ))}
-      <ArrowImage src={arrowCity} alt="arrowCity" />
     </ContainerCity>
     <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px"  }}>도시이름2</span>
       <NewContainerCity>
@@ -111,7 +108,6 @@ const Meddle = () => {
             <NewCityName>{city.name}</NewCityName>
           </NewSquareStyleCity>
         ))}
-        <NewArrowImage src={arrowCity} alt="arrowCity" />
       </NewContainerCity>
     </MeddleContainer>
   );
@@ -223,7 +219,6 @@ const NewCitiesSlider = () => {
     alert(`You clicked on ${cityName}`);
   };
 
-  
 };
 // ✅ 스타일 코드
 const MeddleContainer = styled.div`
@@ -506,13 +501,7 @@ const NewCityName = styled.div`
   color: darkblue;  /* 글자 색상 다르게 설정 */
 `;
 
-const NewArrowImage = styled.img`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  margin-left: 1180px;
-  margin-top: 110px;
-`;
+
 
 
 export default Meddle;
