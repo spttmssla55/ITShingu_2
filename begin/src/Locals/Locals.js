@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./Locals.css";
-import LocalsImage from '../image/Locals.jpg';
-import { FaSearch, FaUserCircle } from 'react-icons/fa';
+import LocalsImage from "../image/Locals.jpg";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 
 // 호텔 이미지들 import
-import Hotel1Image from '../image/Hotel1.jpg';
-import Hotel2Image from '../image/Hotel2.jpg';
-import Hotel3Image from '../image/Hotel3.jpg';
-import Hotel4Image from '../image/Hotel4.jpg';
-import Hotel5Image from '../image/Hotel5.jpg';
+import Hotel1Image from "../image/Hotel1.jpg";
+import Hotel2Image from "../image/Hotel2.jpg";
+import Hotel3Image from "../image/Hotel3.jpg";
+import Hotel4Image from "../image/Hotel4.jpg";
+import Hotel5Image from "../image/Hotel5.jpg";
+import Hotel6Image from "../image/Hotel6.jpg";
+import Hotel7Image from "../image/Hotel7.jpg";
 
 const contents = {
   header: {
@@ -19,14 +21,10 @@ const contents = {
     { image: Hotel1Image, name: "Hotel Artemide", location: "Rome, Italy", recommendedBy: "Sofia" },
     { image: Hotel2Image, name: "Hotel Diana Roof Garden", location: "Rome, Italy", recommendedBy: "Matteo" },
     { image: Hotel3Image, name: "Starhotels Metropole", location: "Rome, Italy", recommendedBy: "Sofia" },
-  ],
-  moreHotels: [
     { image: Hotel4Image, name: "Rome Marriott Grand Hotel Flora", location: "Rome, Italy", recommendedBy: "Liam" },
     { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
-    { image: Hotel2Image, name: "Hotel Tokyo", location: "Tokyo, Japan", recommendedBy: "James" },
-    { image: Hotel3Image, name: "Hotel Rome", location: "Rome, Italy", recommendedBy: "Sophia" },
-    { image: Hotel4Image, name: "Hotel Paris", location: "Paris, France", recommendedBy: "Liam" },
-    { image: Hotel1Image, name: "Hotel Berlin", location: "Berlin, Germany", recommendedBy: "Olivia" },
+    { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant by 'UNA cucina'", location: "Rome, Italy", recommendedBy: "James" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Liam" },
   ],
   recommenders: [
     { name: "Sofia", image: "https://via.placeholder.com/30" },
@@ -36,27 +34,29 @@ const contents = {
     { name: "James", image: "https://via.placeholder.com/30" },
     { name: "Sophia", image: "https://via.placeholder.com/30" },
     { name: "Olivia", image: "https://via.placeholder.com/30" },
-    { name: "Mia", image: "https://via.placeholder.com/30" },
-    { name: "John", image: "https://via.placeholder.com/30" },
-    { name: "George", image: "https://via.placeholder.com/30" },
-  ]
+  ],
 };
 
 const Locals = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [hotels, setHotels] = useState(contents.hotels);
+  const [hotels, setHotels] = useState(contents.hotels.slice(0, 4)); // 처음에는 4개의 호텔만 보임
   const [showMore, setShowMore] = useState(true);
   const [showRecommenders, setShowRecommenders] = useState(false);
 
   const handleSearch = () => console.log("검색어:", searchQuery);
+
   const handleViewMore = () => {
-    const newHotels = [...hotels, ...contents.moreHotels];
+    const nextHotels = contents.hotels.slice(hotels.length, hotels.length + 4); // 현재 리스트에 4개씩 추가
+    const newHotels = [...hotels, ...nextHotels];
     setHotels(newHotels);
-    if (newHotels.length >= 12) setShowMore(false); // 더 보기 버튼 숨기기
+    
+    if (newHotels.length >= 16) {
+      setShowMore(false); // 최대 16개까지만 보이도록 설정
+    }
   };
 
   const toggleRecommenders = () => {
-    setShowRecommenders(prevState => !prevState);
+    setShowRecommenders((prev) => !prev);
   };
 
   return (
@@ -83,13 +83,16 @@ const Locals = () => {
 
       <section className="recommendations">
         <div className="recommendations-header">
-          <h2>현재인과 함께하는 소도시 여행 속 추천 장소</h2>
-          <button className="show-recommenders-btn" onClick={toggleRecommenders}>
-            {showRecommenders ? "추천인 목록 숨기기" : "추천인 목록 보기"}
-          </button>
+          <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
 
-          {showRecommenders && (
-            <ul className="recommender-list">
+          {/* 추천인 목록 보기 버튼 */}
+          <div className="recommender-container">
+            <button className="show-recommenders-btn" onClick={toggleRecommenders}>
+              {showRecommenders ? "추천인 목록 숨기기" : "추천인 목록 보기"}
+            </button>
+
+            {/* 추천인 목록 - 상태(showRecommenders)에 따라 표시 */}
+            <ul className={`recommender-list ${showRecommenders ? "show" : ""}`}>
               {contents.recommenders.map((recommender, index) => (
                 <li key={index} className="recommender-item">
                   <img src={recommender.image} alt={recommender.name} className="recommender-image" />
@@ -97,7 +100,7 @@ const Locals = () => {
                 </li>
               ))}
             </ul>
-          )}
+          </div>
         </div>
 
         <div className="recommendation-list">
@@ -105,6 +108,7 @@ const Locals = () => {
             <div className="recommendation-card" key={index}>
               <div className="card-image-container">
                 <img src={hotel.image} alt={hotel.name} className="card-image" />
+                {/* 아이콘을 상단 우측에 배치 */}
                 <FaUserCircle className="user-icon" />
               </div>
               <div className="card-info">
@@ -115,6 +119,7 @@ const Locals = () => {
             </div>
           ))}
         </div>
+
         {showMore && <button className="view-more-btn" onClick={handleViewMore}>더 보기</button>}
       </section>
     </div>
