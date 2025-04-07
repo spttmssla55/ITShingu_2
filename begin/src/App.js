@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import routes from "./RouteFor/routes";
 import Header from "./Header";
+import Footer from "./Footer";
 import FindAccountForm from "./Login/ID_pw_find"; 
 import "./App.css"; // 
+
 
 const renderRoutes = (routes) => {
     return routes.map((route, index) => {
@@ -33,6 +35,9 @@ function AppWrapper() {
                     <Route path="/popup/find" element={<FindAccountForm />} />
                 </Routes>
             </div>
+            {!isPopupRoute && <Footer />}
+            
+            
         </>
     );
 }
@@ -41,6 +46,7 @@ function App() {
     return (
         <Router>
             <AppWrapper />
+            
         </Router>
     );
 }
