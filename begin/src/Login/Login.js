@@ -21,15 +21,17 @@ export default function LoginForm() {
     alignItems: "flex-start",
     backgroundColor: "#ffffff",
     paddingTop: "4rem",
+    
   };
   
   
   const boxStyle = {
-    backgroundColor: "#a0d468",
+    backgroundColor: "#AAD1E7",
     padding: "2rem",
     borderRadius: "1rem",
     width: "100%",
     maxWidth: "400px",
+    border : "1px solid #111111"
   };
   
 
@@ -45,7 +47,7 @@ export default function LoginForm() {
   const buttonStyle = {
     width: "100%",
     padding: "0.75rem",
-    backgroundColor: "#00a86b",
+    backgroundColor: "#94A0D1",
     color: "#000000",
     border: "none",
     borderRadius: "0.5rem",

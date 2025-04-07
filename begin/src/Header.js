@@ -37,6 +37,8 @@ const HeaderContainer = styled.header`
   width: 100%;
   box-sizing: border-box;
   max-width: 100%;
+  border-bottom: 2px solid #111111; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 1400px) { 
     padding: 10px 20px; /* 작은 화면에서도 여백 줄이기 */
@@ -87,6 +89,7 @@ const LoginText = styled.span`
   transition: color 0.3s ease;
   position: relative;  /* 위치 조정 */
   z-index: 10;  /* 메뉴보다 위로 */
+  
 
   &:hover {
     color: #ff5722; /* hover 시 색상 변경 */
@@ -121,7 +124,11 @@ const NavList = styled.ul`
   }
 `;
 
-const NavItem = styled.li``;
+const NavItem = styled.li`
+display: inline-block;
+padding: 0px 150px;
+`;
+
 
 const NavLink = styled.a`
   color: black;
@@ -131,6 +138,7 @@ const NavLink = styled.a`
   display: inline-block;  /* 글자 크기만큼만 클릭 가능 */
   padding: 0px 150px;  /* 너무 넓은 클릭 영역 제거 */
   transition: color 0.3s ease;
+  
 
   &:hover {
     text-decoration: underline;

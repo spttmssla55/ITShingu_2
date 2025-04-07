@@ -7,13 +7,18 @@ function Signup() {
     firstName: '',
     lastName: '',
     email: '',
+    id:'',
     password: '',
     confirmPassword: '',
     gender: '',
+    userType: '', // 추가
     dateOfBirth: '',
     termsAccepted: false
   });
+  
 
+  const [isIdAvailable, setIsIdAvailable] = useState(null);
+  const [selectedUserType, setSelectedUserType] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
   const [passwordMatch, setPasswordMatch] = useState('');
 
@@ -62,6 +67,15 @@ function Signup() {
     }
   };
 
+  const checkIdAvailability = () => { // ✅ 추가됨
+    const usedIds = ['testuser', 'admin', 'guest']; // 예시
+    if (usedIds.includes(formData.id)) {
+      setIsIdAvailable(false);
+    } else {
+      setIsIdAvailable(true);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
@@ -75,6 +89,51 @@ function Signup() {
     <div className="signup-container">
       <h2>회원가입</h2>
       <form className="signup-form" onSubmit={handleSubmit}>
+      <div className="user-type-select-wrapper">
+        {selectedUserType === 'tenant' && (
+          <div className="tooltip-bottom">
+            🧑 일반 사용자로 가입하여 방을 검색과 예약을 할 수 있어요.
+                (대신 숙소 등록은 안되요!)
+          </div>
+        )}
+        {selectedUserType === 'landlord' && (
+          <div className="tooltip-bottom">
+            🏠 집주인으로 가입하여 숙소를 등록할 수 있어요.
+                (대신 방 예약은 안되요!)
+          </div>
+        )}
+
+        <div className="user-type-select">
+          <label>
+            <input
+              type="radio"
+              name="userType"
+              value="tenant"
+              onChange={(e) => {
+                handleChange(e);
+                setSelectedUserType('tenant');
+              }}
+              checked={formData.userType === 'tenant'}
+            />
+            사용자
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="userType"
+              value="landlord"
+              onChange={(e) => {
+                handleChange(e);
+                setSelectedUserType('landlord');
+              }}
+              checked={formData.userType === 'landlord'}
+            />
+            집주인
+          </label>
+        </div>
+      </div>
+
+
         <div className="name-inputs">
           <input
             type="text"
@@ -104,6 +163,26 @@ function Signup() {
           className="input-field"
           required
         />
+          <div className="id-check-wrapper">
+          <input
+            type="text"
+            name="id"
+            value={formData.id}
+            onChange={(e) => {
+              handleChange(e);
+              setIsIdAvailable(null); // 상태 초기화
+            }}
+            placeholder="아이디"
+            className="input-field"
+            required
+          />
+          <button type="button" onClick={checkIdAvailability} className="check-btn">
+            중복확인
+          </button>
+        </div>
+        {isIdAvailable === true && <div className="id-available">사용 가능한 아이디입니다.</div>}
+        {isIdAvailable === false && <div className="id-unavailable">이미 사용 중인 아이디입니다.</div>}
+
         <input
           type="password"
           name="password"
@@ -131,7 +210,7 @@ function Signup() {
           {passwordMatch === 'match' && '비밀번호가 일치합니다.'}
           {passwordMatch === 'mismatch' && '비밀번호가 일치하지 않습니다.'}
         </div>
-        <div className="gender-select">
+        {/* <div className="gender-select">
           <label>
             <input
               type="radio"
@@ -152,7 +231,8 @@ function Signup() {
             />
             여성
           </label>
-        </div>
+        </div> */}
+
         <div>
           <input
             type="checkbox"
