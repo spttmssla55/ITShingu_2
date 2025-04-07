@@ -16,6 +16,15 @@ const Meddle = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [activeButton, setActiveButton] = useState("left");
   const boxes = Array(9).fill("사진");
+  const imageData = [
+    { src: fan2_1, rating: 5 },
+    { src: fan2_2, rating: 4 },
+    { src: fan2_1, rating: 3 },
+    { src: fan2_2, rating: 2 },
+    { src: fan2_1, rating: 1 },
+    { src: fan2_2, rating: 1 },
+  ];
+
   // 예시 데이터 (DB에서 받아올 예정)
   const [cities, setCities] = useState([
     { id: 1, name: "서울", imageUrl: fan2_1 },
@@ -24,6 +33,11 @@ const Meddle = () => {
     { id: 4, name: "인천", imageUrl: fan2_2 },
   ]);
   
+  const renderStars = (rating) => {
+    const fullStars = "★".repeat(rating); // 채워진 별
+    const emptyStars = "☆".repeat(5 - rating); // 빈 별
+    return fullStars + emptyStars;
+  };
 
   const handleClickcity = (cityName) => {
     alert(`You clicked on ${cityName}`);
@@ -72,24 +86,12 @@ const Meddle = () => {
       <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px" }}>평점순</span>
       {/* ✅ 둥근 사각형 리스트 */}
       <RoundedRectangleContainer>
-        <RoundedRectangle>
-          <img src={fan2_1} alt="fan2_1"/>
-        </RoundedRectangle>
-        <RoundedRectangle>
-          <img src={fan2_2} alt="fan2_2"/>
-        </RoundedRectangle>
-        <RoundedRectangle>
-          <img src={fan2_1} alt="fan2_1"/>
-        </RoundedRectangle>
-        <RoundedRectangle>
-          <img src={fan2_2} alt="fan2_2"/>
-        </RoundedRectangle>
-        <RoundedRectangle>
-          <img src={fan2_1} alt="fan2_1"/>
-        </RoundedRectangle>
-        <RoundedRectangle>
-          <img src={fan2_2} alt="fan2_2"/>
-        </RoundedRectangle>
+        {imageData.map((item, index) => (
+          <RoundedRectangle key={index}>
+            <img src={item.src} alt={`fan-${index + 1}`} />
+            <Rating>{renderStars(item.rating)} {item.rating}</Rating>
+          </RoundedRectangle>
+        ))}
       </RoundedRectangleContainer>
       <span style={{ fontSize: "24px", fontWeight: "bold", display: "block", width: "100%", maxWidth: "1180px", marginTop: "40px" }}>도시이름</span>
       <ContainerCity>
@@ -190,37 +192,27 @@ const ToggleRectangles = () => {
       <RectangleContainer>
         {activeButton === "left" ? (
           <>
-            <Rectangle>1</Rectangle>
-            <Rectangle>2</Rectangle>
-            <Rectangle>3</Rectangle>
-            <Rectangle>4</Rectangle>
+            <Rectangle><img src={"fan2_1"} alt="상품1" /></Rectangle>
+            <Rectangle><img src={"fan2_2"} alt="상품2" /></Rectangle>
+            <Rectangle><img src={"fan2_1"} alt="상품3" /></Rectangle>
+            <Rectangle><img src={"fan2_2"} alt="상품4" /></Rectangle>
           </>
         ) : (
           <>
-            <Rectangle>5</Rectangle>
-            <Rectangle>6</Rectangle>
-            <Rectangle>7</Rectangle>
-            <Rectangle>8</Rectangle>
+            <Rectangle><img src={"fan2_2"} alt="상품5" /></Rectangle>
+            <Rectangle><img src={"fan2_1"} alt="상품6" /></Rectangle>
+            <Rectangle><img src={"fan2_2"} alt="상품7" /></Rectangle>
+            <Rectangle><img src={"fan2_1"} alt="상품8" /></Rectangle>
           </>
         )}
       </RectangleContainer>
     </>
   );
-};
-const NewCitiesSlider = () => {
-  const [cities, setCities] = useState([
-    { id: 1, name: "서울", imageUrl: fan2_1 },
-    { id: 2, name: "부산", imageUrl: fan2_2 },
-    { id: 3, name: "대구", imageUrl: fan2_1 },
-    { id: 4, name: "인천", imageUrl: fan2_2 },
-  ]);
+};  
 
-  const handleClickcity = (cityName) => {
-    alert(`You clicked on ${cityName}`);
-  };
-
-};
 // ✅ 스타일 코드
+
+
 const MeddleContainer = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -283,7 +275,11 @@ const BoxSlider = styled.div`
   gap: 10px;
   transition: transform 0.5s ease-in-out;
 `;
-
+const Rating = styled.div`
+  font-size: 18px;
+  color: black;
+  margin-top: 10px;
+`;
 const ResponsiveBox = styled.div`
   width: 30%;
   min-width: 200px;
@@ -369,7 +365,13 @@ const RectangleContainer = styled.div`
 const Rectangle = styled.div`
   width: 280px;
   height: 200px;
-  background-color: lightgray;
+  border: solid 1px;
+ 
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const RoundedRectangleContainer = styled.div`
@@ -380,13 +382,15 @@ const RoundedRectangleContainer = styled.div`
 
 const RoundedRectangle = styled.div`
   width: 180px;
-  height: 150px;
-  background-color: lightgray;
+  height: 180px; /* 높이를 약간 늘려서 평점 표시 공간 추가 */
+  
   border-radius: 20px;
   overflow: hidden;
   display: flex;
+  flex-direction: column; /* 이미지와 평점을 세로로 배치 */
   align-items: center;
   justify-content: center;
+  padding: 10px;
   
   img {
     width: 100%;
