@@ -37,8 +37,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   box-sizing: border-box;
   max-width: 100%;
-  border-bottom: 2px solid #111111; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 
   @media (max-width: 1400px) { 
     padding: 10px 20px; /* 작은 화면에서도 여백 줄이기 */
@@ -136,7 +135,6 @@ const NavLink = styled.a`
   text-decoration: none;
   font-size: 1.2rem;
   display: inline-block;  /* 글자 크기만큼만 클릭 가능 */
-  padding: 0px 150px;  /* 너무 넓은 클릭 영역 제거 */
   transition: color 0.3s ease;
   
 
