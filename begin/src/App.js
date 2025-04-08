@@ -4,7 +4,7 @@ import routes from "./RouteFor/routes";
 import Header from "./Header";
 import Footer from "./Footer";
 import FindAccountForm from "./Login/ID_pw_find"; 
-import "./App.css"; // 
+import "./App.css"; 
 
 
 const renderRoutes = (routes) => {
