@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./Locals.css";
 import LocalsImage from "../image/Locals.jpg";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
 
-// 호텔 이미지들 import
+// 호텔 이미지 import
 import Hotel1Image from "../image/Hotel1.jpg";
 import Hotel2Image from "../image/Hotel2.jpg";
 import Hotel3Image from "../image/Hotel3.jpg";
@@ -23,40 +24,77 @@ const contents = {
     { image: Hotel3Image, name: "Starhotels Metropole", location: "Rome, Italy", recommendedBy: "Sofia" },
     { image: Hotel4Image, name: "Rome Marriott Grand Hotel Flora", location: "Rome, Italy", recommendedBy: "Liam" },
     { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
-    { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant by 'UNA cucina'", location: "Rome, Italy", recommendedBy: "James" },
-    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Liam" },
+    { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant", location: "Rome, Italy", recommendedBy: "James" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Noah" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Ava" },
   ],
   recommenders: [
-    { name: "Sofia", image: "https://via.placeholder.com/30" },
-    { name: "Matteo", image: "https://via.placeholder.com/30" },
-    { name: "Liam", image: "https://via.placeholder.com/30" },
-    { name: "Emma", image: "https://via.placeholder.com/30" },
-    { name: "James", image: "https://via.placeholder.com/30" },
-    { name: "Sophia", image: "https://via.placeholder.com/30" },
-    { name: "Olivia", image: "https://via.placeholder.com/30" },
+    { name: "Sofia", image: "https://randomuser.me/api/portraits/women/44.jpg" },
+    { name: "Matteo", image: "https://randomuser.me/api/portraits/men/55.jpg" },
+    { name: "Liam", image: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { name: "Emma", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+    { name: "James", image: "https://randomuser.me/api/portraits/men/25.jpg" },
+    { name: "Noah", image: "https://randomuser.me/api/portraits/men/23.jpg" },
+    { name: "Olivia", image: "https://randomuser.me/api/portraits/women/33.jpg" },
+    { name: "Isabella", image: "https://randomuser.me/api/portraits/women/12.jpg" },
+    { name: "Ethan", image: "https://randomuser.me/api/portraits/men/66.jpg" },
+    { name: "Ava", image: "https://randomuser.me/api/portraits/women/19.jpg" },
   ],
 };
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const Locals = () => {
+  const query = useQuery();
+  const initialFilter = query.get("name");
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [hotels, setHotels] = useState(contents.hotels.slice(0, 4)); // 처음에는 4개의 호텔만 보임
+  const [hotels, setHotels] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showRecommenders, setShowRecommenders] = useState(false);
+  const [selectedRecommender, setSelectedRecommender] = useState(initialFilter);
 
-  const handleSearch = () => console.log("검색어:", searchQuery);
+  useEffect(() => {
+    if (initialFilter) {
+      const filtered = contents.hotels.filter(hotel => hotel.recommendedBy === initialFilter);
+      setHotels(filtered);
+      setShowMore(false);
+    } else {
+      setHotels(contents.hotels.slice(0, 4));
+    }
+  }, [initialFilter]);
+
+  const handleSearch = () => {
+    console.log("검색어:", searchQuery);
+  };
 
   const handleViewMore = () => {
-    const nextHotels = contents.hotels.slice(hotels.length, hotels.length + 4); // 현재 리스트에 4개씩 추가
+    const nextHotels = contents.hotels.slice(hotels.length, hotels.length + 4);
     const newHotels = [...hotels, ...nextHotels];
     setHotels(newHotels);
-    
-    if (newHotels.length >= 16) {
-      setShowMore(false); // 최대 16개까지만 보이도록 설정
+
+    if (newHotels.length >= contents.hotels.length) {
+      setShowMore(false);
     }
   };
 
   const toggleRecommenders = () => {
     setShowRecommenders((prev) => !prev);
+  };
+
+  const handleRecommenderClick = (name) => {
+    setSelectedRecommender(name);
+    const filtered = contents.hotels.filter(hotel => hotel.recommendedBy === name);
+    setHotels(filtered);
+    setShowMore(false);
+  };
+
+  const handleShowAll = () => {
+    setSelectedRecommender(null);
+    setHotels(contents.hotels.slice(0, 4));
+    setShowMore(true);
   };
 
   return (
@@ -85,16 +123,20 @@ const Locals = () => {
         <div className="recommendations-header">
           <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
 
-          {/* 추천인 목록 보기 버튼 */}
           <div className="recommender-container">
             <button className="show-recommenders-btn" onClick={toggleRecommenders}>
               {showRecommenders ? "추천인 목록 숨기기" : "추천인 목록 보기"}
             </button>
 
-            {/* 추천인 목록 - 상태(showRecommenders)에 따라 표시 */}
             <ul className={`recommender-list ${showRecommenders ? "show" : ""}`}>
               {contents.recommenders.map((recommender, index) => (
-                <li key={index} className="recommender-item">
+                <li
+                  key={index}
+                  className={`recommender-item ${
+                    selectedRecommender === recommender.name ? "active" : ""
+                  }`}
+                  onClick={() => handleRecommenderClick(recommender.name)}
+                >
                   <img src={recommender.image} alt={recommender.name} className="recommender-image" />
                   <span>{recommender.name}</span>
                 </li>
@@ -103,24 +145,47 @@ const Locals = () => {
           </div>
         </div>
 
-        <div className="recommendation-list">
-          {hotels.map((hotel, index) => (
-            <div className="recommendation-card" key={index}>
-              <div className="card-image-container">
-                <img src={hotel.image} alt={hotel.name} className="card-image" />
-                {/* 아이콘을 상단 우측에 배치 */}
-                <FaUserCircle className="user-icon" />
-              </div>
-              <div className="card-info">
-                <h3>{hotel.name}</h3>
-                <p>{hotel.location}</p>
-                <span>추천인: {hotel.recommendedBy}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        {selectedRecommender && (
+          <div style={{ marginTop: "10px" }}>
+            <button className="view-more-btn" onClick={handleShowAll}>
+              전체 추천 보기
+            </button>
+          </div>
+        )}
 
-        {showMore && <button className="view-more-btn" onClick={handleViewMore}>더 보기</button>}
+<div className="recommendation-list">
+  {hotels.map((hotel, index) => {
+    const recommender = contents.recommenders.find(r => r.name === hotel.recommendedBy);
+
+    return (
+      <div className="recommendation-card" key={index}>
+        <div className="card-image-container">
+          <img src={hotel.image} alt={hotel.name} className="card-image" />
+          {recommender ? (
+            <img
+              src={recommender.image}
+              alt={recommender.name}
+              className="user-image-overlay"
+            />
+          ) : (
+            <FaUserCircle className="user-icon" />
+          )}
+        </div>
+        <div className="card-info">
+          <h3>{hotel.name}</h3>
+          <p>{hotel.location}</p>
+          <span>추천인: {hotel.recommendedBy}</span>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+        {showMore && (
+          <button className="view-more-btn" onClick={handleViewMore}>
+            더 보기
+          </button>
+        )}
       </section>
     </div>
   );

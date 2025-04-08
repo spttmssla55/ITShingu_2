@@ -19,7 +19,7 @@ const Header = () => {
       <Nav>
         <NavList>
           <NavItem><NavLink href="/city">도시들</NavLink></NavItem>
-          <NavItem><NavLink href="/locals">현지인</NavLink></NavItem>
+          <NavItem><NavLink href="/local">현지인</NavLink></NavItem>
           <NavItem><NavLink href="/about">이벤트</NavLink></NavItem>
         </NavList>
       </Nav>
