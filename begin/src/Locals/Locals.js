@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Locals.css";
 import LocalsImage from "../image/Locals.jpg";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
@@ -10,13 +10,11 @@ import Hotel2Image from "../image/Hotel2.jpg";
 import Hotel3Image from "../image/Hotel3.jpg";
 import Hotel4Image from "../image/Hotel4.jpg";
 import Hotel5Image from "../image/Hotel5.jpg";
-import Hotel6Image from "../image/Hotel6.jpg";
+import Hotel6Image from "../image/Locals.jpg";
 import Hotel7Image from "../image/Hotel7.jpg";
 
 const contents = {
   header: {
-    title: "작은 도시, 거대한 감동",
-    subtitle: "여기와 함께, 외국 있는 여행의 진짜를 찾아 떠나요.",
   },
   hotels: [
     { image: Hotel1Image, name: "Hotel Artemide", location: "Rome, Italy", recommendedBy: "Sofia" },
@@ -48,12 +46,12 @@ function useQuery() {
 
 const Locals = () => {
   const query = useQuery();
+  const navigate = useNavigate(); // navigate 객체를 사용하여 URL을 변경
   const initialFilter = query.get("name");
 
   const [searchQuery, setSearchQuery] = useState("");
   const [hotels, setHotels] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  const [showRecommenders, setShowRecommenders] = useState(false);
   const [selectedRecommender, setSelectedRecommender] = useState(initialFilter);
 
   useEffect(() => {
@@ -80,69 +78,51 @@ const Locals = () => {
     }
   };
 
-  const toggleRecommenders = () => {
-    setShowRecommenders((prev) => !prev);
-  };
-
   const handleRecommenderClick = (name) => {
     setSelectedRecommender(name);
     const filtered = contents.hotels.filter(hotel => hotel.recommendedBy === name);
     setHotels(filtered);
     setShowMore(false);
+    
+    // 추천인 클릭 시 URL의 쿼리 파라미터를 변경
+    navigate(`?name=${name}`);
   };
 
   const handleShowAll = () => {
     setSelectedRecommender(null);
     setHotels(contents.hotels.slice(0, 4));
     setShowMore(true);
+
+    // 전체 보기 클릭 시 URL에서 `name` 파라미터 제거
+    navigate(`/locals`);
   };
 
   return (
     <div className="locals-container">
       <header className="locals-header">
-        <img src={LocalsImage} alt="Small City" className="header-image" />
         <div className="header-text">
           <h1>{contents.header.title}</h1>
           <p>{contents.header.subtitle}</p>
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="여행 키워드 검색"
-              className="search-input"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button className="search-btn" onClick={handleSearch}>
-              <FaSearch />
-            </button>
-          </div>
         </div>
       </header>
 
       <section className="recommendations">
         <div className="recommendations-header">
           <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
+        </div>
 
-          <div className="recommender-container">
-            <button className="show-recommenders-btn" onClick={toggleRecommenders}>
-              {showRecommenders ? "추천인 목록 숨기기" : "추천인 목록 보기"}
-            </button>
-
-            <ul className={`recommender-list ${showRecommenders ? "show" : ""}`}>
-              {contents.recommenders.map((recommender, index) => (
-                <li
-                  key={index}
-                  className={`recommender-item ${
-                    selectedRecommender === recommender.name ? "active" : ""
-                  }`}
-                  onClick={() => handleRecommenderClick(recommender.name)}
-                >
-                  <img src={recommender.image} alt={recommender.name} className="recommender-image" />
-                  <span>{recommender.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* 추천인들을 상단에 박스 형식으로 나열 */}
+        <div className="recommender-container">
+          {contents.recommenders.map((recommender, index) => (
+            <div
+              key={index}
+              className={`recommender-item ${selectedRecommender === recommender.name ? "active" : ""}`}
+              onClick={() => handleRecommenderClick(recommender.name)}
+            >
+              <img src={recommender.image} alt={recommender.name} className="recommender-image" />
+              <span>{recommender.name}</span>
+            </div>
+          ))}
         </div>
 
         {selectedRecommender && (
@@ -153,33 +133,33 @@ const Locals = () => {
           </div>
         )}
 
-<div className="recommendation-list">
-  {hotels.map((hotel, index) => {
-    const recommender = contents.recommenders.find(r => r.name === hotel.recommendedBy);
+        <div className="recommendation-list">
+          {hotels.map((hotel, index) => {
+            const recommender = contents.recommenders.find(r => r.name === hotel.recommendedBy);
 
-    return (
-      <div className="recommendation-card" key={index}>
-        <div className="card-image-container">
-          <img src={hotel.image} alt={hotel.name} className="card-image" />
-          {recommender ? (
-            <img
-              src={recommender.image}
-              alt={recommender.name}
-              className="user-image-overlay"
-            />
-          ) : (
-            <FaUserCircle className="user-icon" />
-          )}
+            return (
+              <div className="recommendation-card" key={index}>
+                <div className="card-image-container">
+                  <img src={hotel.image} alt={hotel.name} className="card-image" />
+                  {recommender ? (
+                    <img
+                      src={recommender.image}
+                      alt={recommender.name}
+                      className="user-image-overlay"
+                    />
+                  ) : (
+                    <FaUserCircle className="user-icon" />
+                  )}
+                </div>
+                <div className="card-info">
+                  <h3>{hotel.name}</h3>
+                  <p>{hotel.location}</p>
+                  <span>추천인: {hotel.recommendedBy}</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <div className="card-info">
-          <h3>{hotel.name}</h3>
-          <p>{hotel.location}</p>
-          <span>추천인: {hotel.recommendedBy}</span>
-        </div>
-      </div>
-    );
-  })}
-</div>
 
         {showMore && (
           <button className="view-more-btn" onClick={handleViewMore}>
