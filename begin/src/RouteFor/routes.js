@@ -11,6 +11,7 @@ import Login from "../Login/Login";
 import Signup from "../Login/Signup";
 import Meddle from "../Meddle";
 import ID_pw_find from "../Login/ID_pw_find";
+import User from "../MyPage/User";
 
 const routes = [
     {
@@ -44,6 +45,10 @@ const routes = [
     {
         path: '/ID_pw_find',
         component: ID_pw_find,
+    },
+    {
+        path: '/UserMyPage',
+        component: User,
     },
 
     // {
