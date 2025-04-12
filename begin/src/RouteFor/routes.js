@@ -12,6 +12,7 @@ import Signup from "../Login/Signup";
 import Meddle from "../Meddle";
 import ID_pw_find from "../Login/ID_pw_find";
 import User from "../MyPage/User";
+import Local from "../Local/Local";
 
 const routes = [
     {
@@ -37,7 +38,10 @@ const routes = [
         path: '/signup',
         component: Signup,
     },
-
+    {
+        path: '/local',
+        component: Local
+    },
     {
         path: '/locals',
         component: Locals,
@@ -50,6 +54,8 @@ const routes = [
         path: '/UserMyPage',
         component: User,
     },
+
+    
 
     // {
     //     path: '/dashboard',
