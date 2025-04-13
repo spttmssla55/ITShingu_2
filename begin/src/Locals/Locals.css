@@ -117,7 +117,7 @@ html, body {
 
 .recommendation-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개씩 나열 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 최소 300px 크기의 카드로 자동 배치 */
   gap: 25px;
   margin-top: 30px;
 }
@@ -164,6 +164,7 @@ html, body {
   border-radius: 25px;
   cursor: pointer;
   margin-top: 20px;
+  transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
 }
 
 .view-more-btn:hover {
@@ -249,4 +250,23 @@ html, body {
     margin-right: 0;
     margin-bottom: 10px;
   }
+}
+.hotel-review-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+}
+
+.review-card {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-card:last-child {
+  border-bottom: none;
+}
+
+.review-card p {
+  margin: 5px 0;
 }
