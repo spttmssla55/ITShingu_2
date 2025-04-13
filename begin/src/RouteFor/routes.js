@@ -11,7 +11,7 @@ import Login from "../Login/Login";
 import Signup from "../Login/Signup";
 import Meddle from "../Meddle";
 import ID_pw_find from "../Login/ID_pw_find";
-import Lodgment_add from "../Lodgment/Lodgment_add";
+import User from "../MyPage/User";
 import Local from "../Local/Local";
 import HotelDetail from "../Pages/HotelDetail";
 
@@ -56,9 +56,10 @@ const routes = [
         component: ID_pw_find,
     },
     {
-        path: '/Lodgment_add',
-        component: Lodgment_add,
+        path: '/UserMyPage',
+        component: User,
     },
+
     
 
     // {
