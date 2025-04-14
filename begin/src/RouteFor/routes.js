@@ -5,7 +5,6 @@ import City from "../Cities/City";
 // import Dashboard from './pages/Dashboard';
 // import Settings from './pages/Settings';
 // import Profile from './pages/Profile';
-import CityGestH from "../Cities/CityGestH";
 import Locals from "../Locals/Locals";
 import Login from "../Login/Login";
 import Signup from "../Login/Signup";
@@ -15,6 +14,10 @@ import User from "../MyPage/User";
 import Local from "../Local/Local";
 import HotelDetail from "../Pages/HotelDetail";
 import Lodgment_add from "../Lodgment/Lodgment_add"
+import CityLodging from "../Cities/CityLodging";
+import Owner from "../Cities/Owner";
+import CityForm from "../Cities/CityForm";
+import CitySerch from "../Cities/CitySerch";
 
 const routes = [
     {
@@ -30,10 +33,6 @@ const routes = [
         path: '/city',
         component: City,
         exact: true,  // exact가 true일 경우, 정확히 해당 경로와 일치하는 경우만 렌더링
-    },
-    {
-        path: '/citygesth',
-        component: CityGestH,
     },
     {
         path: '/login',
@@ -64,8 +63,28 @@ const routes = [
         path: '/Lodgment_add',
         component: Lodgment_add,
     },
+    {  //선택한 도시에 대한 숙소를 보여주는 컴포넌트
+        path: '/citylodging',
+        component: CityLodging,
+    },
 
-    
+    {  //숙소 추가하는 컴포넌트
+        path: '/owner',
+        component: Owner,
+    },
+
+    {  //도시 추가하는 컴포넌트
+        path: '/cityform',
+        component: CityForm,
+    },
+
+    {  //도시 추가하는 컴포넌트
+        path: '/cityserch',
+        component: CitySerch,
+    },
+
+
+
 
 
 
