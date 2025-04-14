@@ -14,6 +14,7 @@ import ID_pw_find from "../Login/ID_pw_find";
 import User from "../MyPage/User";
 import Local from "../Local/Local";
 import HotelDetail from "../Pages/HotelDetail";
+import Lodgment_add from "../Lodgment/Lodgment_add"
 
 const routes = [
     {
@@ -59,6 +60,11 @@ const routes = [
         path: '/UserMyPage',
         component: User,
     },
+    {
+        path: '/Lodgment_add',
+        component: Lodgment_add,
+    },
+
     
 
 

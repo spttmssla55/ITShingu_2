@@ -66,9 +66,11 @@ const TopRow = styled.div`
 const LogoButton = styled.button`
   margin-left : 70px;
   background: transparent;  /* 배경 투명 */
+  color: black;
   border: none;  /* 테두리 투명 */
   cursor: pointer; /* 클릭 가능 표시 */
   padding: 0; /* 불필요한 여백 제거 */
+  outline: none; /* 포커스 시 파란색 배경 제거 */
 `;
 
 
