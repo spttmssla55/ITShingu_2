@@ -33,7 +33,7 @@ const Footer = () => {
                 <StyledDiv style={{ fontSize: "15px", marginLeft: "200px", color: "gray" }}>파트너</StyledDiv>
                 <StyledDiv style={{ fontSize: "15px", marginLeft: "180px", color: "gray" }}>지원</StyledDiv>
 
-                <StyledDiv noMargin>수업 시간 09:00 ~ 16:20</StyledDiv>
+                <StyledDiv noMargin>상담 시간 09:00 ~ 16:20</StyledDiv>
 
                 <StyledDiv style={{ fontSize: "15px", marginLeft: "250px", color: "gray" }}>회사소개</StyledDiv>
                 <StyledDiv style={{ fontSize: "15px", marginLeft: "200px", color: "gray" }}>파트너 홈</StyledDiv>
