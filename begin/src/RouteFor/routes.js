@@ -11,7 +11,9 @@ import Login from "../Login/Login";
 import Signup from "../Login/Signup";
 import Meddle from "../Meddle";
 import ID_pw_find from "../Login/ID_pw_find";
-import Lodgment_add from "../Lodgment/Lodgment_add";
+import User from "../MyPage/User";
+import Local from "../Local/Local";
+import HotelDetail from "../Pages/HotelDetail";
 
 const routes = [
     {
@@ -19,6 +21,10 @@ const routes = [
         component: Meddle,
         exact: true,  // exact가 true일 경우, 정확히 해당 경로와 일치하는 경우만 렌더링
     },
+    {
+        path: '/hotel-detail', 
+        component: HotelDetail,
+      },
     {
         path: '/city',
         component: City,
@@ -37,7 +43,10 @@ const routes = [
         path: '/signup',
         component: Signup,
     },
-
+    {
+        path: '/local',
+        component: Local
+    },
     {
         path: '/locals',
         component: Locals,
@@ -47,10 +56,12 @@ const routes = [
         component: ID_pw_find,
     },
     {
-        path: '/Lodgment_add',
-        component: Lodgment_add,
+        path: '/UserMyPage',
+        component: User,
     },
     
+
+
 
     // {
     //     path: '/dashboard',
