@@ -340,12 +340,11 @@ const Image = styled.img`
 const ButtonContainer = styled.div`
   display: flex;
   margin-top: 20px;
-  border: 1px solid black;
 `;
 
 const ToggleButton = styled.button`
   flex-grow: 1;
-  padding: 15px 190px;
+  padding: 15px 200px;
   font-size: 18px;
   font-weight: bold;
   border: 1px solid gray;

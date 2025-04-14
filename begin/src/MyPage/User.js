@@ -82,6 +82,7 @@ const User = () => {
                   style={{
                     padding: '5px',
                     fontSize: '15px',
+                    
                   }}
                   onClick={handleCancelClick}
                 >
