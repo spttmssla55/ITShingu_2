@@ -13,6 +13,7 @@ import Meddle from "../Meddle";
 import ID_pw_find from "../Login/ID_pw_find";
 import User from "../MyPage/User";
 import Local from "../Local/Local";
+import HotelDetail from "../Pages/HotelDetail";
 
 const routes = [
     {
@@ -20,6 +21,10 @@ const routes = [
         component: Meddle,
         exact: true,  // exact가 true일 경우, 정확히 해당 경로와 일치하는 경우만 렌더링
     },
+    {
+        path: '/hotel-detail', 
+        component: HotelDetail,
+      },
     {
         path: '/city',
         component: City,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Locals.css";
 import LocalsImage from "../image/Locals.jpg";
-import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 // 호텔 이미지 import
 import Hotel1Image from "../image/Hotel1.jpg";
@@ -14,8 +14,7 @@ import Hotel6Image from "../image/Locals.jpg";
 import Hotel7Image from "../image/Hotel7.jpg";
 
 const contents = {
-  header: {
-  },
+  header: {},
   hotels: [
     { image: Hotel1Image, name: "Hotel Artemide", location: "Rome, Italy", recommendedBy: "Sofia" },
     { image: Hotel2Image, name: "Hotel Diana Roof Garden", location: "Rome, Italy", recommendedBy: "Matteo" },
@@ -24,6 +23,10 @@ const contents = {
     { image: Hotel5Image, name: "Intercontinental Rome Ambasciatori Palace", location: "Rome, Italy", recommendedBy: "Emma" },
     { image: Hotel6Image, name: "Il Grande Gatsby Bar & Restaurant", location: "Rome, Italy", recommendedBy: "James" },
     { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Noah" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Olivia" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Ava" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Ethan" },
+    { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Ava" },
     { image: Hotel7Image, name: "Hotel Scott House", location: "Rome, Italy", recommendedBy: "Ava" },
   ],
   recommenders: [
@@ -46,7 +49,7 @@ function useQuery() {
 
 const Locals = () => {
   const query = useQuery();
-  const navigate = useNavigate(); // navigate 객체를 사용하여 URL을 변경
+  const navigate = useNavigate();
   const initialFilter = query.get("name");
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -64,10 +67,6 @@ const Locals = () => {
     }
   }, [initialFilter]);
 
-  const handleSearch = () => {
-    console.log("검색어:", searchQuery);
-  };
-
   const handleViewMore = () => {
     const nextHotels = contents.hotels.slice(hotels.length, hotels.length + 4);
     const newHotels = [...hotels, ...nextHotels];
@@ -83,19 +82,20 @@ const Locals = () => {
     const filtered = contents.hotels.filter(hotel => hotel.recommendedBy === name);
     setHotels(filtered);
     setShowMore(false);
-    
-    // 추천인 클릭 시 URL의 쿼리 파라미터를 변경
     navigate(`?name=${name}`);
-  };
+  };  
 
   const handleShowAll = () => {
     setSelectedRecommender(null);
     setHotels(contents.hotels.slice(0, 4));
     setShowMore(true);
-
-    // 전체 보기 클릭 시 URL에서 `name` 파라미터 제거
     navigate(`/locals`);
   };
+
+  const handleCardClick = (hotel) => {
+    navigate(`/hotel-detail?name=${encodeURIComponent(hotel.name)}`);
+  };
+  
 
   return (
     <div className="locals-container">
@@ -111,7 +111,6 @@ const Locals = () => {
           <h2>현지인과 함께하는 소도시 여행 속 추천 장소</h2>
         </div>
 
-        {/* 추천인들을 상단에 박스 형식으로 나열 */}
         <div className="recommender-container">
           {contents.recommenders.map((recommender, index) => (
             <div
@@ -138,7 +137,7 @@ const Locals = () => {
             const recommender = contents.recommenders.find(r => r.name === hotel.recommendedBy);
 
             return (
-              <div className="recommendation-card" key={index}>
+              <div className="recommendation-card" key={index} onClick={() => handleCardClick(hotel)} style={{ cursor: "pointer" }}>
                 <div className="card-image-container">
                   <img src={hotel.image} alt={hotel.name} className="card-image" />
                   {recommender ? (
