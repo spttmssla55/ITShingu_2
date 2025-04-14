@@ -46,6 +46,13 @@ const Lodging = () => {
     setRooms(updatedRooms);
   };
 
+  const removeRoom = (index) => {
+    const updatedRooms = [...rooms];
+    updatedRooms.splice(index, 1);
+    setRooms(updatedRooms);
+  };
+
+
   const styles = {
     form: {
       maxWidth: "600px",
@@ -114,8 +121,13 @@ const Lodging = () => {
 
       {rooms.map((room, index) => (
         <div key={index} style={styles.roomBox}>
-          <input type="file" accept="image/*" multiple onChange={(e) => handleImageChange(index, e)} style={styles.input} />
-
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(e) => handleImageChange(index, e)}
+            style={styles.input}
+          />
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "8px" }}>
             {room.imageFiles &&
               room.imageFiles.map((file, fileIdx) => (
@@ -128,7 +140,7 @@ const Lodging = () => {
                       height: "100px",
                       objectFit: "cover",
                       borderRadius: "6px",
-                      border: "1px solid #ccc",
+                      border: "1px solid #ccc"
                     }}
                   />
                   <button
@@ -145,7 +157,7 @@ const Lodging = () => {
                       width: "20px",
                       height: "20px",
                       cursor: "pointer",
-                      fontSize: "12px",
+                      fontSize: "12px"
                     }}
                   >
                     ×
@@ -156,6 +168,19 @@ const Lodging = () => {
 
           <input name="roomName" placeholder="객실 명" value={room.roomName} onChange={(e) => handleRoomChange(index, e)} style={styles.input} />
           <input name="price" placeholder="가격" value={room.price} onChange={(e) => handleRoomChange(index, e)} style={styles.input} />
+
+          <button
+            type="button"
+            onClick={() => removeRoom(index)}
+            style={{
+              ...styles.button,
+              backgroundColor: "#e74c3c",
+              color: "#fff",
+              marginTop: "8px"
+            }}
+          >
+            객실 삭제
+          </button>
         </div>
       ))}
 
