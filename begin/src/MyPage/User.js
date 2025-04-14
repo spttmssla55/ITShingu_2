@@ -249,7 +249,7 @@ const User = () => {
       case 'wishlist':
         return (
           <div>
-            <h2>위시리스트</h2>
+            <h2 >위시리스트</h2>
             {selectedImage ? (
               <img
                 src={selectedImage}
@@ -373,6 +373,7 @@ const User = () => {
                 border: 'none',
                 cursor: 'pointer',
                 backgroundColor: selectedMenu === 'info' ? '#f0f0f0' : 'white',
+                
               }}
               onClick={() => handleMenuClick('info')}
             >
